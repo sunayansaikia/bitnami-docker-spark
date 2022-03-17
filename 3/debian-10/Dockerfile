@@ -35,10 +35,14 @@ ENV BITNAMI_APP_NAME="spark" \
 
 COPY tools/spark-sql-perf /tools/spark-sql-perf
 COPY tools/tpcds-kit /tools/tpcds-kit
+COPY tools/tpch-dbgen /tools/tpch-dbgen
 RUN chmod -R 755 /tools
 
 WORKDIR /tools/tpcds-kit/tools
 RUN make OS=LINUX
+
+WORKDIR /tools/tpch-dbgen
+RUN make
 
 WORKDIR /opt/bitnami/spark
 USER 1001
